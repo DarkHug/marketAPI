@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from db import models
-from db.config import engine
-from routes import orders
+from db import config
+from routes import orders, sellers
 
 
-models.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=config.engine)
 
 app = FastAPI(
     title='Market FastAPI',
 )
 
 app.include_router(orders.orders)
+app.include_router(sellers.sellers)
